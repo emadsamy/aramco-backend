@@ -32,6 +32,10 @@
   color: #fff;
   font-size: 15px;
 }
+.swiper-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 .swiper-btn img {
   width: 10px;
 }
@@ -488,11 +492,14 @@
 }
 #showAllTabs {
   color: #fff;
-  padding: 11px 18px;
+  padding: 0 10px;
   background: #222;
   line-height: 1;
   /* margin-bottom: 10px; */
   opacity: 0;
+}
+#showAllTabs img {
+    width: 21px;
 }
 #showAllTabs.active {
   opacity: 1;

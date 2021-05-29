@@ -38,7 +38,7 @@
                         <div class="title">infrastructure</div>
                       </button>
 
-                      <div id="infrastructure" class="ss-body-text">
+                      <div id="infrastructure" class="ss-body-text ss-body-text-first">
                         <div data-child-tab="#airportsMarkers" class="child-tab-title"><span
                             class="icon-play icon"></span> Airports</div>
                         <div data-child-tab="#piersMarkers" class="child-tab-title"><span class="icon-play icon"></span>
@@ -50,18 +50,18 @@
                         <div class="title">Vehicles</div>
                       </button>
 
-                      <div id="vehicles" class="ss-body-text">
-                        <div class="child-tab-title"><span class="icon-play icon"></span> Land Vehicles</div>
+                      <div id="vehicles" class="ss-body-text  ss-body-text-last">
+                        <div id="landVehiclesBtn" class="child-tab-title"><span class="icon-play icon"></span> Land Vehicles</div>
                         <div class="child-tabs">
                           <div class="flex-wrap">
-                            <div data-child-tab="#slideshowBus" class="inside-child-tab">Buses,
+                            <div data-child-tab="#slideshowBus" class="inside-child-tab">Buses
                             </div>
-                            <div data-child-tab="#slideshowCars" class="inside-child-tab">Cars, </div>
+                            <div data-child-tab="#slideshowCars" class="inside-child-tab">Cars </div>
                             <div data-child-tab="#slideshowHeavyEquipments" class="inside-child-tab">Heavy Equipment
                             </div>
                           </div>
                         </div>
-                        <div data-child-tab="#waterCrafts" class="child-tab-title"><span class="icon-play icon"></span>
+                        <div data-child-tab="#waterCrafts" class="child-tab-title child-tab-title-second"><span class="icon-play icon"></span>
                           Watercrafts</div>
                         <div data-child-tab="#aircrafts" class="child-tab-title"><span class="icon-play icon"></span>
                           Aircrafts</div>
@@ -1548,12 +1548,14 @@
               <a href="{{ url('/') }}" class="swiper-btn swiper-home-btn">
                 <img src="assets/img/icons/home.svg" class="icon-home img-fluid" alt="">
               </a>
-              <button class="toggle-tabs-prev swiper-btn">
+              <button id="showAllTabs" class="swiper-btn">
+                <img src="assets/img/icons/arrow-left.svg" class="img-fluid" alt="">
+              </button>
+              <button class="toggle-tabs-prev swiper-btn"  disabled="true">
                 <img src="assets/img/icons/left-arrow.svg" class="img-fluid" alt="">
               </button>
-              <button class="toggle-tabs-next swiper-btn">
+              <button class="toggle-tabs-next swiper-btn" disabled="true">
                 <img src="assets/img/icons/right-arrow.svg" class="img-fluid" alt=""></button>
-              {{-- <button id="showAllTabs">Show All</button> --}}
             </div>
           </div>
         </div>
@@ -1587,6 +1589,8 @@
       $("#showAllTabs").removeClass('active');
       $(".inside-child-tab").removeClass('opacity01');
       $(".child-tab-title").removeClass('opacity01');
+      $(".toggle-tabs-next").attr('disabled', true);
+      $(".toggle-tabs-prev").attr('disabled', true);
     });
     // Handle Tabs
     $(".tab-header-wi").on('click', function () {
@@ -1600,6 +1604,7 @@
       $('.toggle-sh-tp-container').fadeOut(200);
       $(tabContainer).fadeIn(200);
       $("#showAllTabs").addClass('active');
+
     });
 
     $(".child-tab-title").on('click', function () {
@@ -1613,6 +1618,8 @@
       $(".child-tab-container").fadeOut(200, function () { });
       $(tab).fadeIn(200);
       $(".inside-child-tab").removeClass('active');
+      $(".toggle-tabs-next").attr('disabled', true);
+      $(".toggle-tabs-prev").attr('disabled', true); 
     });
 
     $(".inside-child-tab").on('click', function () {
@@ -1622,6 +1629,9 @@
       $(this).addClass('active');
       $(".child-tab-container").fadeOut(200);
       $(tab).fadeIn(200);
+      if ($(".inside-child-tab").hasClass('active')) {
+        $(".toggle-tabs-next").attr('disabled', false);
+      } 
     });
     </script>
     <script type="text/javascript">
@@ -1767,17 +1777,29 @@
     </script>
 
 <script type="text/javascript">
-$(".toggle-tabs-next").on('click', function () {
-  if ($(".child-tab-title").hasClass('active')) {
-    // $(".child-tab-title").hasClass('active').next().addClass('active').siblings().removeClass('active');
-    $(".ss-body-text").find('.child-tab-title.active').next().addClass('active').siblings().removeClass('active');
-    console.log($(".ss-body-text").find('.child-tab-title.active').next().attr('data-child-tab'));
-  } else {
-    $(".ss-body-text").first().find('.child-tab-title:first-of-type').addClass('active');
-    // $(".child-tab-title").hasClass('active').next().addClass('active').siblings().removeClass('active');
-  }
-    // $(".tab-header-wi.active").next('.ss-body-text').find('.child-tabs').slideDown(200);
-    // $(".tab-header-wi.active").children('.child-tab-title').addClass('active');
-});
+  $(".toggle-tabs-next").on('click', function () {
+    $(".inside-child-tab").addClass('opacity01');
+    $(".inside-child-tab.active").next().addClass('active').siblings().removeClass('active');
+    var tab = $(".inside-child-tab.active").attr('data-child-tab');
+    $(".child-tab-container").fadeOut(200);
+    $(tab).fadeIn(200);
+    if ($('.child-tabs .inside-child-tab:last-of-type').hasClass('active')) {
+      $(this).attr('disabled', true);
+      $('.toggle-tabs-prev').attr('disabled', false);
+    }
+  });
+
+  $(".toggle-tabs-prev").on('click', function () {
+    $(".inside-child-tab").addClass('opacity01');
+    $(".inside-child-tab.active").prev().addClass('active').siblings().removeClass('active');
+    var tab = $(".inside-child-tab.active").attr('data-child-tab');
+    $(".child-tab-container").fadeOut(200);
+    $(tab).fadeIn(200);
+    $('.toggle-tabs-next').attr('disabled', false);
+    if ($('.child-tabs .inside-child-tab:first-of-type').hasClass('active')) {
+      $(this).attr('disabled', true);
+      $('.toggle-tabs-next').attr('disabled', false);
+    }
+  });
 </script>
 @endpush
