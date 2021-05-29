@@ -35,7 +35,7 @@ class SignatureController extends Controller
 
         $data = new Signature();
         $data->image_name = $fileName;
-        $data->image_path = url('signatures/'.$fileName);
+        $data->image_path = url('storage/signatures/'.$fileName);
         $data->name = $request->name;
         $data->date = $request->date;
         $data->save();
