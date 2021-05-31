@@ -38,7 +38,7 @@
       <footer id="footer">
         <div class="container-fluid height-fluid">
           <div class="footer-content height-fluid d-flex">
-            <div class="fc-left">Saudi Aramco Mobility Center</div>
+            <div class="fc-left">Saudi Aramco Mobility Center <a class="home-btn" href="{{ url('/') }}">Home</a></div>
             <div class="fc-right"></div>
           </div>
         </div>
@@ -98,6 +98,19 @@
 
 @push('css')
 <link rel="stylesheet" href="assets/css/signature.css" />
+<style type="text/css">
+  .home-btn {
+    color: #897a5b;
+    margin-left: 15px;
+    text-decoration: underline !important;
+  }
+  .home-btn:hover {
+    color: #6c5e42
+  }
+  .home-btn:active {
+    opacity: 0.7
+  }
+</style>
 @endpush
 
 @push('js')
