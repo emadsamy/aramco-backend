@@ -16,7 +16,7 @@
         </div>
       </nav>
       <div class="container-fluid">
-        <div class="main-title text-uppercase">Advanced and integrated mobility</div>
+        <div class="main-title text-uppercase d-flex align-items-center"><button id="fulscreenBtn"><img src="assets/img/icons/expand.svg" /></button> Advanced and integrated mobility</div>
         <div class="full-page">
           <div class="home-center d-flex text-center">
             <div>
@@ -40,7 +40,6 @@
           <div class="footer-content height-fluid d-flex">
             <div class="fc-left">Saudi Aramco Mobility Center <a class="home-btn" href="{{ url('/') }}">Home</a>
               </div>
-              {{-- <button id="go-button">full screen</button> --}}
             <div class="fc-right"></div>
           </div>
         </div>
@@ -118,62 +117,7 @@
 @push('js')
 <script src="assets/js/canvas.js"></script>
 <script>
-/* Get into full screen */
-function GoInFullscreen(element) {
-  if(element.requestFullscreen)
-    element.requestFullscreen();
-  else if(element.mozRequestFullScreen)
-    element.mozRequestFullScreen();
-  else if(element.webkitRequestFullscreen)
-    element.webkitRequestFullscreen();
-  else if(element.msRequestFullscreen)
-    element.msRequestFullscreen();
-}
 
-/* Get out of full screen */
-function GoOutFullscreen() {
-  if(document.exitFullscreen)
-    document.exitFullscreen();
-  else if(document.mozCancelFullScreen)
-    document.mozCancelFullScreen();
-  else if(document.webkitExitFullscreen)
-    document.webkitExitFullscreen();
-  else if(document.msExitFullscreen)
-    document.msExitFullscreen();
-}
-
-/* Is currently in full screen or not */
-function IsFullScreenCurrently() {
-  var full_screen_element = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || null;
-  
-  // If no element is in full-screen
-  if(full_screen_element === null)
-    return false;
-  else
-    return true;
-}
-
-$("#go-button").on('click', function() {
-  if(IsFullScreenCurrently())
-    GoOutFullscreen();
-  else
-    GoInFullscreen($("#fullscreenAll").get(0));
-});
-
-if (event.which  == 'f') {
-  GoOutFullscreen();
-}
-
-$(document).on('fullscreenchange webkitfullscreenchange mozfullscreenchange MSFullscreenChange', function() {
-  if(IsFullScreenCurrently()) {
-    $("#element span").text('Full Screen Mode Enabled');
-    $("#go-button").text('Disable Full Screen');
-  }
-  else {
-    $("#element span").text('Full Screen Mode Disabled');
-    $("#go-button").text('Enable Full Screen');
-  }
-});
 
 </script>
 <script type="text/javascript">
@@ -182,6 +126,7 @@ $(document).on('fullscreenchange webkitfullscreenchange mozfullscreenchange MSFu
         $("#signatureTouchpad").addClass('active');
         $("#signatureForm").removeClass('active');
         resizeCanvas();
+        GoOutFullscreen();
       });
 
       // $("#saveSignature").on('click', function () {

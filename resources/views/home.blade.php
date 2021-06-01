@@ -3,7 +3,7 @@
 @section("content")
     <!-- Home Page -->
   <div class="main-bg"></div>
-  <div class="wrapper">
+  <div id="fullscreenAll" class="wrapper">
     <div class="homepage">
       <nav id="nav">
         <div class="container-fluid">
@@ -16,7 +16,7 @@
         </div>
       </nav>
       <div class="container-fluid">
-        <div class="main-title text-uppercase">Advanced and integrated mobility</div>
+        <div class="main-title text-uppercase d-flex align-items-center"><button id="fulscreenBtn"><img src="assets/img/icons/expand.svg" /></button> Advanced and integrated mobility </div>
         <div class="full-page">
           <div class="home-center text-center">
             <a href="#" class="home-icon-col animate__animated animate__fadeInDown animate__delay-0s">
@@ -47,6 +47,7 @@
   <!-- Home Page -->
 @endsection
 
-@push('css')
+@push('js')
+
     
 @endpush

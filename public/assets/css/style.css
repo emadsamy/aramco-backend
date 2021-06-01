@@ -423,6 +423,13 @@ nav .container-fluid {
   border: 2px solid #897a5b;
   color: #897a5b;
 }
+#fulscreenBtn {
+  width: 20px;
+  margin-right: 10px;
+}
+.wrapper {
+  overflow-y: auto;
+}
 /* Homepage */
 
 /* Footer */
