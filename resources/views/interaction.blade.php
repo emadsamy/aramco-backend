@@ -2,7 +2,7 @@
 
 @section("content")
     <!-- Home Page -->
-  <div id="fullscreenAll" class="wrapper">
+  <div class="wrapper">
     <div class="homepage">
       <nav id="nav">
         <div class="container-fluid">

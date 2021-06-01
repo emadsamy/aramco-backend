@@ -3,7 +3,7 @@
 @section("content")
     <!-- Signature Page -->
   <div class="main-bg"></div>
-  <div id="fullscreenAll" class="wrapper">
+  <div class="wrapper">
     <div class="homepage">
       <nav id="nav">
         <div class="container-fluid">
@@ -126,7 +126,7 @@
         $("#signatureTouchpad").addClass('active');
         $("#signatureForm").removeClass('active');
         resizeCanvas();
-        GoOutFullscreen();
+        // GoOutFullscreen();
       });
 
       // $("#saveSignature").on('click', function () {
