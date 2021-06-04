@@ -53,6 +53,9 @@
       <button id="closeVideoStream" class="close-video-btn">
         <img src="assets/img/icons/cancel.svg" class="img-fluid" />
       </button>
+      <button id="reloadVideoStream" class="close-video-btn mt-5">
+        <img src="assets/img/icons/reload.svg" class="img-fluid" />
+      </button>
       <div class="video-container">
         <div class="video-auto">
           <div class="vid-overlay">
@@ -60,8 +63,8 @@
               <img src="assets/img/icons/play-vd.svg" class="img-fluid" />
             </button>
           </div>
-          <video id="videoPlayer" loop>
-            <source src="{{ url('assets/img/aaa.mp4') }}" type="video/mp4">
+          <video id="videoPlayer" loop autoplay>
+            <source src="http://api.directorstudio.me/uploads/sliders/2021-03-03-03-46-45-0603faf653b96e-original.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
@@ -103,6 +106,12 @@ $("#videoPlayer").bind("ended", function () {
   $("#playVideoStream").find("img").attr("src", "assets/img/icons/play-vd.svg");
   // $("#videoPlayer").get(0).vid.pause();
   // $(".video-modal").fadeOut(400);
+});
+
+$("#reloadVideoStream").on('click', function() {
+  $('#videoPlayer')[0].load();
+  $(".vid-overlay").addClass("active");
+  $("#playVideoStream").find("img").attr("src", "assets/img/icons/play-vd.svg");
 });
 </script>
 @endpush
