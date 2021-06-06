@@ -60,7 +60,7 @@
       <div class="vcm-collection">
 
         <!-- Add videos here -->
-        <button class="vcm-card">
+        {{-- <button class="vcm-card">
           <video>
             <source src="http://api.directorstudio.me/uploads/sliders/2021-03-03-03-46-45-0603faf653b96e-original.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -82,7 +82,7 @@
               <img src="assets/img/icons/play.svg" class="img-fluid" />
             </div>
           </div>
-        </button>
+        </button> --}}
         <!-- Add videos here -->
 
       </div>
@@ -113,7 +113,7 @@
           </div>
 
           <video id="videoPlayer" loop>
-            <source src="http://api.directorstudio.me/uploads/sliders/2021-03-03-03-46-45-0603faf653b96e-original.mp4" type="video/mp4">
+            <source src="{{ url('assets/img/aaa.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
 
@@ -127,7 +127,11 @@
 @push('js')
 <script type="text/javascript">
   $("#openVideoStream").on('click', function () {
-    $(".video-collection-modal").fadeIn(300);
+    if ($(".vcm-card")[0]){
+      $(".video-collection-modal").fadeIn(300);   
+    } else {
+      $(".video-modal").fadeIn(300);
+    }
     $("body").css('overflowY', 'hidden');
   });
 
@@ -136,9 +140,17 @@
     vid.pause();
     $(".vid-overlay").addClass("active");
     $("#playVideoStream").find("img").attr("src", "assets/img/icons/play-vd.svg");
-    $(".video-modal").fadeOut(300);
-    $(".video-collection-modal").fadeIn(300);
+    // $(".video-modal").fadeOut(300);
+    // $(".video-collection-modal").fadeIn(300);
     $("body").css('overflowY', 'auto');
+
+    if ($(".vcm-card")[0]){
+      $(".video-modal").fadeOut(300);
+      $(".video-collection-modal").fadeIn(300);
+    } else {
+      $(".video-modal").fadeOut(300);
+      $(".video-collection-modal").fadeOut(300);
+    }
   });
 
   $("#closeVideoCollection").on('click', function () {
@@ -175,6 +187,8 @@ $("#reloadVideoStream").on('click', function() {
 
 $(".vcm-card").on('click', function () {
   var video = $(this).find('source').attr('src');
+  var vid = $("#videoPlayer").get(0);
+  vid.play();
   $("#videoPlayer").attr('src', video);
   $(".video-collection-modal").fadeOut(300);
   $(".video-modal").fadeIn(300);
